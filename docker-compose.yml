@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  bot:
+    image: python:3.5-alpine
+    entrypoint: /app/script/run.sh
+    working_dir: /app
+    environment:
+      SLACK_API_KEY: $SLACK_API_KEY
+    volumes:
+      - ./:/app/
