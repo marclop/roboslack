@@ -1,4 +1,5 @@
 # RoboSlack
+[![PyPI version](https://badge.fury.io/py/roboslack.svg)](https://badge.fury.io/py/roboslack)
 
 RoboSlack is a [Slack](https://slack.com/) bot python framework that allows you to create simple enough bots
 
@@ -12,6 +13,12 @@ RoboSlack is a [Slack](https://slack.com/) bot python framework that allows you 
 * Conversational
 * Tests
 
+# Installation
+*NOTE: RoboSlack requires python version 3.4+*
+
+```bash
+pip install roboslack
+```
 
 # Configuration parameters
 There's just one configuration parameter, `SLACK_API_KEY` environment variable, setting that to the appropriate
