@@ -30,7 +30,7 @@ class RoboSlack(object):
         )
         self.log = logging.getLogger('roboslack')
         logging.basicConfig(level=logging.INFO)
-        self.__dispatcher = Dispatcher(self)
+        self.__dispatcher = Dispatcher(self.client())
 
     def client(self):
         """
