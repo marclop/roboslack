@@ -12,8 +12,10 @@ class RoboSlack(object):
     def __init__(self, api_key=None, filters=None):
         """
 
-        :param api_key:
-        :type api_key:
+        :param api_key: Slack API Key
+        :type api_key: str
+        :param filters:
+        :type filters: list of str
         """
         if filters is None:
             filters = ["message"]
@@ -34,6 +36,7 @@ class RoboSlack(object):
 
     def client(self):
         """
+        Get the SlackSocket client
 
         :return:
         :rtype: SlackSocket
@@ -42,6 +45,7 @@ class RoboSlack(object):
 
     def name(self):
         """
+        Get the bot name
 
         :return:
         :rtype: str
@@ -51,6 +55,7 @@ class RoboSlack(object):
     @asyncio.coroutine
     def _start_rtm(self, task_id=0):
         """
+        Consume events
 
         :return:
         :rtype:
@@ -59,8 +64,12 @@ class RoboSlack(object):
             yield from self.__dispatcher.handle(event, task_id)
 
     def run(self):
-        log = logging.getLogger('roboslack:executor')
-        loop = asyncio.get_event_loop()
+        """
+        Start processing slack messages by RoboSlack
+
+        :return:
+        :rtype:
+        """
         tasks = []
         if cpu_count() <= 3:
             threads = 4
@@ -73,8 +82,9 @@ class RoboSlack(object):
                     self._start_rtm(i)
                 )
             )
-        log.info("Starting {} threads for the dispatcher, press Ctrl+C to interrupt.".format(threads))
 
+        self.log.info("Starting {} threads for the dispatcher, press Ctrl+C to interrupt.".format(threads))
+        loop = asyncio.get_event_loop()
         loop.run_until_complete(
             asyncio.gather(
                 *tasks
@@ -86,8 +96,17 @@ class RoboSlack(object):
         """
         Subscribe the bot to a type of message
 
+        Function signature is:
+            def function(event, *args)
+
+        :param message_type: Either `direct_message` or `mention`
+        :type message_type: string
+        :param expression: Regex or word to which react
+        :type expression: str
+        :param func: Definition of the function to pass
+        :type func:
         :return:
-        :rtype:
+        :rtype: None
         """
         if message_type not in message_types:
             raise InvalidMessageType(message_type)

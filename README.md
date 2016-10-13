@@ -5,9 +5,9 @@ RoboSlack is a [Slack](https://slack.com/) bot python framework that allows you 
 
 # Features
 
-* Regexp matching
+* Regular expression matching
 * RTM integration
-* Thread support
+* Threaded
 
 ## Missing
 * Conversational
