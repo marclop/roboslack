@@ -9,6 +9,7 @@ from roboslack.MessageTypes import message_types
 
 
 class RoboSlack(object):
+
     def __init__(self, api_key=None, filters=None):
         """
 
@@ -83,7 +84,11 @@ class RoboSlack(object):
                 )
             )
 
-        self.log.info("Starting {} threads for the dispatcher, press Ctrl+C to interrupt.".format(threads))
+        self.log.info(
+            "Starting {} threads for the dispatcher, press Ctrl+C to interrupt.".format(
+                threads
+            )
+        )
         loop = asyncio.get_event_loop()
         loop.run_until_complete(
             asyncio.gather(
@@ -112,6 +117,38 @@ class RoboSlack(object):
             raise InvalidMessageType(message_type)
 
         message_types[message_type][expression] = func
+
+    def on_mention(self, expression, func):
+        """
+        Subscribe the bot to mentions matching the expression
+
+        Function signature is:
+            def function(event, *args)
+
+        :param expression: Regex or word to which react
+        :type expression: str
+        :param func: Definition of the function to pass
+        :type func:
+        :return:
+        :rtype: None
+        """
+        self.on('mention', expression, func)
+
+    def on_direct_message(self, expression, func):
+        """
+        Subscribe the bot to direct messages matching the expression
+
+        Function signature is:
+            def function(event, *args)
+
+        :param expression: Regex or word to which react
+        :type expression: str
+        :param func: Definition of the function to pass
+        :type func:
+        :return:
+        :rtype: None
+        """
+        self.on('direct_message', expression, func)
 
     def say(self, message, event):
         """

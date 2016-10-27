@@ -1,6 +1,6 @@
 import io
 from setuptools import setup
-from roboslack.version import version
+from roboslack.version import VERSION
 
 
 def read(*filenames, **kwargs):
@@ -26,7 +26,7 @@ install_dev_requires = [
 
 setup(
     name="roboslack",
-    version=version,
+    version=VERSION,
     packages=["roboslack"],
     url="http://github.com/marclop/roboslack",
     author="Marc Lopez",

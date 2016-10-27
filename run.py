@@ -28,4 +28,7 @@ if __name__ == "__main__":
         say_something
     )
 
+    bot.on_direct_message('^hello', reply_to_hi)
+    bot.on_mention('^hello', reply_to_hi)
+
     bot.run()
