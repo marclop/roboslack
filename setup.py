@@ -15,7 +15,7 @@ def read(*filenames, **kwargs):
 
 long_description = read("README.md")
 install_requires = [
-    "requests==2.11.1",
+    "requests==2.20.0",
     "slacksocket==0.7"
 ]
 
